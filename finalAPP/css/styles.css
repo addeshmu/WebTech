@@ -1,0 +1,353 @@
+.outerPanel
+{
+    border: 2px solid gray;
+}
+#menu-toggle-2:hover{
+    cursor: pointer;
+}
+body{
+    height:100%;
+}
+.fa-trash-o:hover{
+    color:red;
+}
+.sidebar-grp{
+    color: grey;
+    text-decoration: none;
+}
+.sidebar-grp:hover,#legLink:hover,#billLink:hover,#comLink:hover,#favLink:hover{
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+.sidebar-grp:active,#legLink{
+    color:white;
+    text-decoration: none;
+}
+.sidebar-grp:active .fa-user{
+    color: white;
+    text-decoration: none;
+}
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    /*overflow: hidden;*/
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+    /*overflow: hidden;*/
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 0;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    background: #000;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    overflow-x:hidden ;
+}
+#wrapper.toggled #sidebar-wrapper {
+    width: 20%;
+}
+
+#page-content-wrapper {
+    position: absolute;
+    padding-top: 15px;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0px;
+}
+
+/* Sidebar Styles */
+
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-top: 2px;
+}
+
+.sidebar-nav li {
+    text-indent: 5px;
+    line-height: 40px;
+}
+
+
+.no-margin{
+    margin:0;
+}
+.viewDetails {
+    display: block;
+    width: 115px;
+    height: 25px;
+    background: #3b75d3;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
+
+
+@media(min-width:681px) {
+
+    object{
+        max-width: 100%;
+        height:400px;
+    }
+
+    td .faceImage{
+        width: 30px;
+        max-width: 100%;
+    }
+
+    td .chamberImage{
+        width:25px;
+        max-width: 100%;
+        padding-right: 1%;
+    }
+
+    td .partyImage {
+        width: 25px;
+        max-width: 100%;
+    }
+    .bigHide{
+        display: none;
+    }
+
+    .legImage{
+        padding-top:2%;padding-left:25%;max-width: 100%;width: 80%;
+    }
+
+    .bannerImg{
+        width:10%;
+    }
+    .banner{
+        padding-top:1%;
+        padding-left:30%;
+        font-size: 15px;
+    }
+
+    .container {
+        margin-left: 2%;
+        margin-right: 10%;
+        width: 100%;
+        padding-right: 5%;
+    }
+
+
+    #wrapper {
+        padding-left: 200px;
+
+    }
+    .wrapHeads{
+        margin-left: 3%;
+    }
+    .glyphicon-first{
+        padding-top: 10%;
+    }
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+    #sidebar-wrapper {
+        width: 200px;
+    }
+
+    #wrapper.toggled-2 #sidebar-wrapper {
+        width: 0px;
+    }
+
+
+    #page-content-wrapper {
+        padding-top: 20px;
+        position: relative;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        height: 100%;
+    }
+
+
+    #wrapper.toggled-2 #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+        margin-left: -200px;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        width: auto;
+        height:100%
+    }
+    .banner a{
+        font-size: 100%;
+        text-decoration: none;
+        color: black;
+    }
+    #smallBreak{
+        white-space: pre-wrap;
+    }
+
+}
+
+.panel .panel-default .panel-body{
+    padding: 0;
+}
+.panel .insidePanel {
+    margin: 1%;
+}
+tr:hover{
+    background-color: whitesmoke;
+}
+i:hover{
+    background-color:whitesmoke;
+}
+.fa .fa-chevron-left:hover{
+    background-color: grey;
+}
+@media(max-width:680px) {
+
+
+    .nav #menu-toggle-2{
+        margin-left:20%;
+    }
+    .banner a{
+        font-size: 80%;
+        text-decoration: none;
+        color: black;
+    }
+    #favoriteComT td,#favoriteBT td,#favoriteLT td,#smallBreak{
+        white-space: pre-wrap;
+    }
+
+    td .chamberImage{
+        width:20px;
+        max-width: 100%;
+    }
+    object #pdf{
+
+        height:5000px;
+    }
+    td .partyImage {
+        width: 40px;
+        max-width: 100%;
+    }
+    td .faceImage{
+        width: 40px;
+        max-width: 100%;
+    }
+    .legImage{
+        padding-top:2%;padding-left: 10%;max-width: 100%;width: 80%;
+    }
+    .banner{
+        padding-top:1%;
+        padding-left:20%;
+        font-size: 15px;
+    }
+    .bannerImg{
+        width:40%;
+    }
+    #wrapper.toggled #sidebar-wrapper {
+        width: 30px;
+    }
+
+    select option{
+        font-size: 8px;
+    }
+    optgroup{
+        font-size: 15px;
+    }
+    .panel .insidePanel {
+        margin: 0%;
+    }
+    #wrapper {
+        padding-left: 30px;
+        padding-right: 0;
+    }
+    .glyphicon{
+        padding-right: 40%;
+    }
+
+    .fa-user{
+        padding-right: 40%;
+    }
+    .glyphicon-first{
+        padding-top: 10%;
+    }
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+    #menu-toggle-2{
+        margin: 0;
+        padding: 0;
+    }
+    #sidebar-wrapper {
+        width: 30px;
+    }
+    .wrapHeads{
+        margin-left: 6%;
+    }
+    #wrapper.toggled-2 #sidebar-wrapper {
+        width: 0px;
+        display: none;
+    }
+    #mainNav{
+        height: 50%;
+    }
+    #page-content-wrapper {
+        position: relative;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        height: 100%;
+    }
+
+    #wrapper.toggled-2 #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+        margin-left: -25px;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        width: auto;
+        height:100%
+    }
+
+
+
+    .responsive-stacked-table thead {
+        display: none;
+    }
+    .responsive-stacked-table tr,
+    .responsive-stacked-table th,
+    .responsive-stacked-table td {
+        display: block;
+    }
+    .responsive-stacked-table .smallHide {
+        display: none;
+    }
+    .smallHide{
+        display: none;
+    }
+
+}

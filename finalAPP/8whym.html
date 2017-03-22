@@ -1,0 +1,992 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp1" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Senate Search</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+
+
+
+</head>
+
+<body ng-controller="MyController" >
+
+<nav class="col-sm-12 col-xs-12 navbar navbar-fixed-top " style="background-color:white " >
+
+
+    <div class="nav navbar-nav  col-xs-2" >
+        <div  style="border: none" class="navbar-toggle collapse in pull-left" data-toggle="collapse" class="menu-toogle" id="menu-toggle-2">
+            <i class="fa fa-bars"></i>
+        </div>
+    </div>
+    <span  id="head" class="banner  col-xs-10" >
+        <a href="https://sunlightfoundation.com/api/" ><img class="bannerImg" src="http://cs-server.usc.edu:45678/hw/hw8/images/logo.png">
+        Congress API</a>
+    </span>
+
+</nav>
+
+
+
+
+<div id="wrapper" style="height: 100%;background-color:whitesmoke;padding-top: 30px">
+
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav nav-pills nav-stacked" id="menu" style="padding-top:6%;color: white">
+            <li><a id="legLink" onclick="setSlide()" ng-click="ajxCallState()" class="sidebar-grp" href="#LegHome"><span class="fa fa-user glyphicon-first"></span>Legislators</a></li>
+            <li><a id="billLink" onclick="setSlide1()" ng-click="ajxCallActive()" class="sidebar-grp" href="#BillHome"><span  class="glyphicon glyphicon-file"></span>Bills</a></li>
+            <li><a id="comLink" ng-click="ajxCallComm()" class="sidebar-grp" href="#CommitteeHome"><span  class="glyphicon glyphicon-log-in"></span>Committees</a></li>
+            <li><a id="favLink" ng-click="triggerCom()" class="sidebar-grp" href="#FavouritesHome"><span  class="glyphicon glyphicon-star"></span>Favorites</a></li>
+        </ul>
+    </div>
+
+    <div id="page-content-wrapper" >
+        <div id="LegHome">
+            <!--            <div class="container-fluid xyz"  >    -->
+
+            <div class="row">
+                <h3 class="wrapHeads">Legislators</h3>
+                <hr class="no-margin" style="border-color: gray;border-style: ridge solid">
+                <hr class="no-margin" style="border-color: gray;border-style: ridge solid;padding-top: 2%">
+            </div>
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false" >
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox" >
+                    <div class="item active" >
+
+                        <div class="container" >
+                            <div class="row" >
+                            <div class="panel panel-default outerPanel">
+
+                                    <ul  class="nav nav-tabs" id="allTabs" >
+                                        <li  class="active" id="L1" ><a data-toggle="tab"  href="#stateTab">State</a></li>
+                                        <li  id="L2"><a data-toggle="tab" ng-click="ajxCallHouse()" href="#houseTab">House</a></li>
+                                        <li  id="L3"><a data-toggle="tab" ng-click="ajxCallSenate()" href="#senateTab">Senate</a></li>
+                                    </ul>
+                                        <div class="tab-content">
+                                            <!--STATE TAB UNDER LEGISLATOR-->
+                                            <!--https://congress.api.sunlightfoundation.com/legislators?apikey=c113fa1d19e84e5e82663f29559830db&per_p
+                                        age=all-->
+                                            <div id="stateTab"  class="tab-pane fade in active" >
+                                                <div class="panel panel-default insidePanel"  >
+
+                                                    <div class="panel-heading" >
+                                                        <div class="row" >
+                                                            <div class="form-inline">
+
+                                                                <label for="stateSelector" class="col-lg-9   col-xs-6  control-label">Legislators By State</label>
+
+                                                                <div class="form-group col-lg-3  col-xs-6">
+
+                                                                    <select class="form-control "  ng-model="search.state" id="stateSelector" name="state" >
+                                                                    <optgroup>
+                                                                        <option value="">All States</option>
+                                                                        <option value="Alaska">Alaska</option>
+                                                                        <option value="Alabama">Alabama</option>
+                                                                        <option value="Arkansas">Arkansas</option>
+                                                                        <option value="Arizona">Arizona</option>
+                                                                        <option value="California">California</option>
+                                                                        <option value="Colorado">Colorado</option>
+                                                                        <option value="Connecticut">Connecticut</option>
+                                                                        <option value="District of Columbia">District of Columbia</option>
+                                                                        <option value="Delaware">Delaware</option>
+                                                                        <option value="Florida">Florida</option>
+                                                                        <option value="Georgia">Georgia</option>
+                                                                        <option value="Hawaii">Hawaii</option>
+                                                                        <option value="Iowa">Iowa</option>
+                                                                        <option value="Idaho">Idaho</option>
+                                                                        <option value="Illinois">Illinois</option>
+                                                                        <option value="Indiana">Indiana</option>
+                                                                        <option value="Kansas">Kansas</option>
+                                                                        <option value="Kentucky">Kentucky</option>
+                                                                        <option value="Lousiana">Louisiana</option>
+                                                                        <option value="Massachusetts">Massachusetts</option>
+                                                                        <option value="Maryland">Maryland</option>
+                                                                        <option value="Maine">Maine</option>
+                                                                        <option value="Michigan">Michigan</option>
+                                                                        <option value="Minnesota">Minnesota</option>
+                                                                        <option value="Missouri">Missouri</option>
+                                                                        <option value="Mississippi">Mississippi</option>
+                                                                        <option value="Montana">Montana</option>
+                                                                        <option value="North Carolina">North Carolina</option>
+                                                                        <option value="North Dakota">North Dakota</option>
+                                                                        <option value="Nebraska">Nebraska</option>
+                                                                        <option value="New Hampshire">New Hampshire</option>
+                                                                        <option value="New Jersey">New Jersey</option>
+                                                                        <option value="New Mexico">New Mexico</option>
+                                                                        <option value="Nevada">Nevada</option>
+                                                                        <option value="New York">New York</option>
+                                                                        <option value="Ohio">Ohio</option>
+                                                                        <option value="Oklahoma">Oklahoma</option>
+                                                                        <option value="Oregon">Oregon</option>
+                                                                        <option value="Pennsylvania">Pennsylvania</option>
+                                                                        <option value="Puerto Rico">Puerto Rico</option>
+                                                                        <option value="Rhode Island">Rhode Island</option>
+                                                                        <option value="South Carolina">South Carolina</option>
+                                                                        <option value="South Dakota">South Dakota</option>
+                                                                        <option value="Tennessee">Tennessee</option>
+                                                                        <option value="Texas">Texas</option>
+                                                                        <option value="Utah">Utah</option>
+                                                                        <option value="Virginia">Virginia</option>
+                                                                        <option value="Vermont">Vermont</option>
+                                                                        <option value="Washington">Washington</option>
+                                                                        <option value="Wisconsin">Wisconsin</option>
+                                                                        <option value="West Virginia">West Virginia</option>
+                                                                        <option value="Wyoming">Wyoming</option>
+                                                                        </optgroup>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div  ng-init="ajxCallState()" class="  table-responsive" id="resultsTable">
+                                                            <table  style="font-size: 10px" class="table" >
+                                                                <thead>
+                                                                <tr>
+                                                                    <th style="text-align:center;width: 10%;margin-right: 10%">Party</th>
+                                                                    <th style="width: 15%">Name</th>
+                                                                    <th style="width: 15%">Chamber</th>
+                                                                    <th style="width: 15%">District</th>
+                                                                    <th style="width: 15%">State</th>
+                                                                    <th style="width: 15%">ViewDetails</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody >
+                                                                <tr dir-paginate="user in users|filter:search|itemsPerPage:10" pagination-id="acs" >
+                                                                    <td class="clicks" style="text-align: center"><img class="partyImage"  src={{user.party}}></td>
+                                                                    <td>{{user.name}}</td>
+                                                                    <td ><img class="chamberImage"  src="{{user.chamsrc}}"><span style="vertical-align:top">{{user.chamber|capitalize}}</span></td>
+                                                                    <td>{{user.district}}</td>
+                                                                    <td >{{user.state}}</td>
+                                                                    <td ng-click="setSelected(user.bioguide_id)"><a href="#myCarousel" role="button" data-slide="next"  class="btn btn-primary right" value="23">View Details</a></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <!--                                                    <dir-pagination-controls boundary-links="true"  template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>-->
+                                                            <dir-pagination-controls pagination-id="acs" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--HOUSE TAB-->
+                                            <div id="houseTab"  class="tab-pane fade" ng-init="ajxCallHouse()">
+                                                <div class="panel panel-default insidePanel"  >
+                                                    <div class="panel-heading" >
+                                                        <div class="row">
+                                                            <div class="form-inline">
+                                                                <label for="houseSearch" class="col-lg-9 col-xs-6 control-label">Legislators By House</label>
+                                                                <div class="form-group col-lg-3 col-xs-6">
+                                                                    <input type="text" id="houseSearch" class="form-control " ng-model="q">
+                                                                </div>
+                                                            </div>
+                                                         </div>
+                                                    </div>
+                                                    <div class="panel-body" >
+                                                        <div   class=" table-responsive">
+                                                            <table  style="font-size: 10px" class="table" id="HouseresultsTable">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th style="text-align:center;width: 25%;">Party</th>
+                                                                    <th style="text-align: left;width: 20%">Name</th>
+                                                                    <th style="width: 15%">Chamber</th>
+                                                                    <th style="width: 10%">District</th>
+                                                                    <th style="width: 10%">State</th>
+                                                                    <th style="text-align:center;width: 20%">ViewDetails</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr dir-paginate="user in usersH|filter:q|itemsPerPage:10" pagination-id="ach"  >
+                                                                    <td style="text-align:center;"><img class="partyImage" src={{user.party}}></td>
+                                                                    <td >{{user.name}}</td>
+                                                                    <td><img class="chamberImage" src="{{user.chamsrc}}"><span style="vertical-align:top">{{user.chamber|capitalize}}</span></td>
+                                                                    <td>{{user.district}}</td>
+                                                                    <td>{{user.state}}</td>
+                                                                    <td ng-click="setSelected(user.bioguide_id)" class="abcd"  style="text-align:center"><a  id="a-{{user.bioguide_id}}" href="#myCarousel"  name="viewLinks" role="button" data-slide="next" class="viewDetailsLeg btn btn-primary right ">View Details</a></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="text-center">
+                                                            <dir-pagination-controls pagination-id="ach" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="senateTab"  class="tab-pane fade" ng-init="ajxCallSenate()" >
+                                                <div class="panel panel-default insidePanel"  >
+                                                    <div class="panel-heading" >
+                                                        <div class="row">
+                                                            <div class="form-inline">
+                                                                <label for="senSearch" class="col-lg-9 col-xs-6 control-label">Legislators By Senator</label>
+                                                                <div class="form-group col-lg-3 col-xs-6">
+                                                                    <input type="text" id="senSearch" class="form-control col-lg-2" ng-model="q2">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body" >
+
+                                                            <div class=" table-responsive">
+                                                                <table  style="font-size: 10px" class="table" id="SenatorResultsTable">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th style="text-align:center;width: 15%;margin-right: 14%">Party</th>
+                                                                        <th style=" width: 15%">Name</th>
+                                                                        <th style="width: 18%">Chamber</th>
+                                                                        <th style="width: 18%">State</th>
+                                                                        <th style="width: 15%">ViewDetails</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr dir-paginate="userm in usersS|filter:q2|itemsPerPage:10" pagination-id="acsen" >
+                                                                        <td style="text-align: center"><img class="partyImage" src={{userm.party}}></td>
+                                                                        <td>{{userm.name}}</td>
+                                                                        <td><img class="chamberImage" src="{{userm.chamsrc}}"><span  style="vertical-align:top">{{userm.chamber|capitalize}}</span></td>
+                                                                        <td>{{userm.state}}</td>
+                                                                        <td ng-click="setSelected(userm.bioguide_id)"><a href="#myCarousel" role="button" data-slide="next" class="btn btn-primary right ">View Details</a></td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        <div class="text-center">
+                                                            <dir-pagination-controls pagination-id="acsen" boundary-links="true" template-url="/php/dirPagination.tpl.html" ></dir-pagination-controls>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--code for view Details-->
+                    <div class="item">
+                        <div class="container"  >
+                            <div class="row">
+                                <div class="panel panel-default" style="padding: 0;margin:0;">
+                                    <div class="panel-heading" style="background-color:white;border-bottom: solid 1px #d2d5db">
+                                        <div class="row">
+                                            <div class="col-lg-11 col-xs-8 panel-title left ">
+                                                <a href="#myCarousel" data-slide="prev"  ><span><i style="font-size: 18px;border: 1px solid;margin-right: 1% " class="fa fa-chevron-left"></i></span></a>Details
+                                            </div>
+                                            <div ng-style="starClass=='fa fa-star'?{'color':'yellow'}:{'color':'black'}" ng-click="setfavs(viewDetails.bioguide_id)" style="text-align: center;border-radius: 5px;font-size: 25px" class="col-lg-1 col-xs-4 viewDetailsLegStar">
+                                                <i ng-style="starClass=='fa fa-star'?{'background-color':'gray'}:{'background-color':'none'}" style="border: 1px solid gray;" ng-class="starClass" id="{{viewDetails.bioguide_id}}" ></i>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="panel-body" style="font-size: 80%;padding: 0;margin: 0">
+
+                                        <div class="col-lg-6" style="padding: 0;margin: 0">
+                                            <div class=" table-responsive " >
+                                                <table class="responsive-stacked-table table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:50%"></th>
+                                                        <th style="width:50%"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <img class="legImage img-responsive"   src="{{viewDetails.photo}}">
+                                                            </td>
+                                                            <td>
+                                                                <table class="table">
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th style="display: none"></th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <tr>
+                                                                        <td>{{viewDetails.name}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>{{viewDetails.email}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>{{viewDetails.chamber}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>{{viewDetails.contact}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="col-lg-2 col-xs-2 pull-left"  style="margin: 0;padding: 0">
+                                                                                <img class="img-responsive"  src="{{viewDetails.party}}">
+                                                                            </div>
+                                                                            <div class="col-lg-1 col-xs-10 pull-left" style="margin: 0;padding: 0">
+                                                                                <span >{{viewDetails.partyName}}</span>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="smallHide">Start Term</td>
+                                                        <td>{{viewDetails.sterm}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="smallHide">End Term</td>
+                                                        <td>{{viewDetails.eterm}}</td>
+                                                    </tr>
+                                                    <tr class="smallHide">
+                                                        <td class="smallHide">Term</td>
+                                                        <td >
+                                                            <div ><uib-progressbar class="progress" animate="false"  value="viewDetails.percentage" type="success">{{viewDetails.percentage}}</uib-progressbar></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="smallHide">Office</td>
+                                                        <td>{{viewDetails.office}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="smallHide">State</td>
+                                                        <td>{{viewDetails.state}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="smallHide">Fax</td>
+                                                        <td>{{viewDetails.fax}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="smallHide">Birthday</td>
+                                                        <td>{{viewDetails.birthday}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="smallHide">Social Links</td>
+                                                        <td><span>
+                                                                <a href="{{viewDetails.twitter}}">
+                                                                    <img style="width: 10%;padding-right: 2%;max-width: 33%" src="http://cs-server.usc.edu:45678/hw/hw8/images/t.png">
+                                                                </a>
+                                                            </span>
+                                                            <span>
+                                                                <a href="{{viewDetails.facebook}}">
+                                                                    <img style="width: 8%;padding-right: 2%;max-width: 33%" src="http://cs-server.usc.edu:45678/hw/hw8/images/f.png">
+                                                                </a>
+                                                            </span>
+                                                            <span>
+                                                                <a href="{{viewDetails.website}}">
+                                                                <img style="width: 6%;max-width: 33%" src="http://cs-server.usc.edu:45678/hw/hw8/images/w.png">
+                                                                </a>
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-xs-12">
+                                            <span style="padding: 0;margin: 0;font-size: 15px">Committees</span>
+                                            <div  class=" table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+
+                                                        <th style="width:15%;" >Chamber</th>
+                                                        <th style="width:10%;">Committee ID</th>
+                                                        <th class="smallHide" style="width:75%;">Name</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="tops in top5c">
+                                                        <td>{{tops.chamber|capitalize}}</td>
+                                                        <td>{{tops.cid}}</td>
+                                                        <td class="smallHide" >{{tops.cname}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <span style="padding: 0;margin: 0;font-size: 15px">Bills</span>
+                                            <div  class=" table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width:15%;">Bill ID</th>
+                                                        <th class="smallHide" style="width:10%;">Title</th>
+                                                        <th class="smallHide" style="width:25%;">Chamber</th>
+                                                        <th class="smallHide " style="width:25%;">Bill Type</th>
+                                                        <th class="smallHide" style="width:25%;">Congress</th>
+                                                        <th class="bigHide" style="text-align:center;width: 50%">Link</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr ng-repeat="topsy in top5b">
+                                                        <td>{{topsy.bid|uppercase}}</td>
+                                                        <td id="#smalBreak" class="smallHide">{{topsy.btitle}}</td>
+                                                        <td class="smallHide">{{topsy.chamber|capitalize}}</td>
+                                                        <td class="smallHide">{{topsy.btype|uppercase}}</td>
+                                                        <td class="smallHide">{{topsy.cong}}</td>
+                                                        <td style="text-align:center" class="bigHide"><a href="{{topsy.webLink}}">Link</a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            </div>-->
+        </div>
+        <div id="BillHome" style="display: none">
+            <div class="row">
+                <h3 class="wrapHeads">Bills</h3>
+                <hr class="no-margin" style="border-color: gray;border-style: ridge solid">
+                <hr class="no-margin" style="border-color: gray;border-style: ridge solid;padding-bottom:1%; ">
+            </div>
+            <div id="myBillCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
+
+                <!-- Wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <div class="container">
+                            <div class="row">
+                                <div class="panel panel-default outerPanel"  >
+
+                                    <ul class="nav nav-tabs" id="allBillTabs">
+                                        <li class="active" id="B1" ><a data-toggle="tab"  href="#actTab">Active Bills</a></li>
+                                        <li id="B2"><a data-toggle="tab" href="#newbillTab">New Bills</a></li>
+                                    </ul>
+
+                                    <div class="panel-body" style="padding: 0;margin: 0">
+                                        <div class="tab-content">
+                                            <div id="actTab"  class="tab-pane fade in active" ng-init="ajxCallActive()">
+                                                <div class="panel panel-default insidePanel">
+                                                    <div class="panel-heading" >
+                                                        <div class="row">
+                                                            <div class="form-inline">
+                                                                <label for="actSearch" class="col-lg-9 col-xs-6 control-label">Active Bills</label>
+                                                                <div class="form-group col-lg-3 col-xs-6">
+                                                                    <input type="text" id="actSearch" class="form-control col-lg-2" ng-model="ab">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div  class="table-responsive" id="billresultsTable">
+                                                            <table  style="font-size: 10px" class="table Bill" >
+                                                                <thead>
+                                                                <tr>
+                                                                    <th style="width: 11%">Bill Id</th>
+                                                                    <th style="width: 7%">Bill Type</th>
+                                                                    <th class="smallHide" style="width: 29%">Title</th>
+                                                                    <th style="width: 10%">Chamber</th>
+                                                                    <th style="width: 10%">Introduced On</th>
+                                                                    <th style="width: 13%">Sponsor</th>
+                                                                    <th style="text-align:center;width: 20%">View Details</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody >
+                                                                <tr dir-paginate="bill in abills|filter:ab|itemsPerPage:10" pagination-id="acbillac" >
+                                                                    <td>{{bill.bid|uppercase}}</td>
+                                                                    <td>{{bill.bType|uppercase}}</td>
+                                                                    <td class="smallHide">{{bill.title}}</td>
+                                                                    <td><img class="chamberImage" src="{{bill.chamsrc}}"><span style="vertical-align:top">{{bill.chamber|capitalize}}</span></td>
+                                                                    <td>{{bill.ion}}</td>
+                                                                    <td>{{bill.sponsor}}</td>
+                                                                    <td style="text-align: center" ng-click="setaBDetails(bill.bid)"><a href="#myBillCarousel" role="button" data-slide="next"  class="btn btn-primary right" >View Details</a></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <!--                                                    <dir-pagination-controls boundary-links="true"  template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>-->
+                                                    <dir-pagination-controls pagination-id="acbillac" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                                </div>
+                                            </div>
+
+                                            <!--HOUSE TAB-->
+                                            <div id="newbillTab"  class="tab-pane fade" >
+                                                <div class="panel panel-default insidePanel">
+                                                    <div class="panel-heading" >
+                                                        <div class="row">
+                                                            <div class="form-inline">
+                                                                <label for="newbSearch" class="col-lg-9 col-xs-5  control-label">New Bills</label>
+                                                                <div class="form-group col-lg-3 col-xs-7 ">
+                                                                    <input type="text" id="newbSearch" class="form-control col-lg-2" ng-model="nb">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <div   class=" table-responsive">
+                                                            <table  style="font-size: 10px" class="table" id="newBillresultsTable">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th style="width: 11%;margin-right: 10%">Bill Id</th>
+                                                                    <th style="width: 7%">Bill Type</th>
+                                                                    <th class="smallHide" style="width: 29%">Title</th>
+                                                                    <th style="width: 10%">Chamber</th>
+                                                                    <th style="width: 10%">Introduced On</th>
+                                                                    <th style="width: 13%">Sponsor</th>
+                                                                    <th style="text-align:center;width: 20%">View Details</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <tr dir-paginate="nbill in nbills|filter:nb|itemsPerPage:10" pagination-id="acbillan"  >
+                                                                    <td>{{nbill.bid|uppercase}}</td>
+                                                                    <td>{{nbill.bType|uppercase}}</td>
+                                                                    <td class="smallHide">{{nbill.title}}</td>
+                                                                    <td><img class="chamberImage" src="{{nbill.chamsrc}}"><span style="vertical-align:top">{{nbill.chamber|capitalize}}</span></td>
+                                                                    <td>{{nbill.ion}}</td>
+                                                                    <td>{{nbill.sponsor}}</td>
+                                                                    <td style="text-align: center" ng-click ="setnBDetails(nbill.bid)"><a href="#myBillCarousel" role="button" data-slide="next"  class=" btn btn-primary right" >View Details</a></td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text-center">
+                                                    <dir-pagination-controls pagination-id="acbillan" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="container" >
+                            <div class="row">
+                                <div class="panel panel-default" >
+                                    <div class="panel-heading" style="background-color:white;border-bottom: solid 1px #d2d5db">
+                                        <div class="row">
+                                            <div class="col-lg-11 col-xs-8 panel-title left ">
+                                                <a href="#myBillCarousel" data-slide="prev" class="left" ><span><i style="font-size: 18px;border: 1px solid;margin-right: 1%; " class="fa fa-chevron-left"></i></span></a>Details
+                                             </div>
+                                            <div  ng-style="starClassBill=='fa fa-star'?{'color':'yellow'}:{'color':'black'}" ng-click="setfavsBill(ibill.bid)" style="display:inline-block;text-align: center;font-size: 25px" class="col-lg-1 col-xs-4 ">
+                                                <i ng-style="starClassBill=='fa fa-star'?{'background-color':'gray'}:{'background-color':'none'}" style="border-radius: 5px;border: 1px solid gray;" id="{{ibill.bid}}" ng-class="starClassBill" ></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body" style="font-size: 70%">
+                                        <div class="col-lg-6  col-xs-12 " style="padding: 0;margin: 0">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Bill ID</td>
+                                                        <td>{{ibill.bid|uppercase}}</td>
+                                                    </tr>
+                                                    <tr class="smallHide">
+                                                        <td>Title</td>
+                                                        <td>{{ibill.title}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bill Type</td>
+                                                        <td>{{ibill.btype|uppercase}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sponsor</td>
+                                                        <td>{{ibill.sponsor}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Chamber</td>
+                                                        <td>{{ibill.chamber|capitalize}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Status</td>
+                                                        <td>{{ibill.status}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Introduced On</td>
+                                                        <td>{{ibill.ion}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Congress URL</td>
+                                                        <td><a href="{{ibill.coURL}}">URL</a> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Version Status</td>
+                                                        <td>{{ibill.vstatus}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Bill URL</td>
+                                                        <td><a href="{{ibill.bURL}}">Link</a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+<!--                                        <div class="col-lg-6 col-xs-12" >-->
+<!--                                            <object style="width:100%;" application="pdf" data="{{ibill.pdfi}}"></object>-->
+<!--                                        </div>-->
+                                        <div class="col-lg-6 col-xs-12" >
+                                            <object id="pdf" style="width:100%" data="{{ibill.pdfi}}" type="application/pdf">
+                                                <!--<embed src="{{ibill.pdfi}}" type="application/pdf">-->
+                                            </object>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="CommitteeHome" style="display: none">
+            <div class="row">
+                <h3 class="wrapHeads">Committees</h3>
+                <hr class="no-margin" style="border-color: gray;border-style: ridge solid">
+                <hr class="no-margin" style="border-color: gray;border-style: ridge solid;padding-bottom:1%; ">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="panel panel-default outerPanel" >
+                        <ul  class="nav nav-tabs" id="allComTabs">
+                            <li  class="active" id="C1" ><a data-toggle="tab"  href="#houseCTab">House</a></li>
+                            <li  id="C2"><a data-toggle="tab" href="#senCTab">Senate</a></li>
+                            <li  id="C3"><a data-toggle="tab" href="#jointCTab">Joint</a></li>
+                        </ul>
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!--STATE TAB UNDER LEGISLATOR-->
+                                <!--https://congress.api.sunlightfoundation.com/legislators?apikey=c113fa1d19e84e5e82663f29559830db&per_p
+                            age=all-->
+                                <div id="houseCTab"  class="tab-pane fade in active" ng-init="ajxCallComm()" >
+                                    <div class="panel panel-default insidePanel" >
+                                        <div class="panel-heading" >
+                                            <div class="row">
+                                                <div class="form-inline">
+                                                    <label for="houseCSearch" class="col-lg-9 col-xs-5 control-label">House</label>
+                                                    <div class="form-group col-lg-3 col-xs-7">
+                                                        <input type="text" id="houseCSearch" class="form-control col-lg-2" ng-model="hc">
+                                                    </div>
+                                                </div>
+                                             </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div   class="  table-responsive" id="hcresultsTable">
+                                                <table  style="font-size: 10px" class="table" >
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 10%;margin-right: 10%"></th>
+                                                        <th style="width: 10%">Chamber</th>
+                                                        <th style="width: 10%">Committee ID</th>
+                                                        <th style="width: 35%">Name</th>
+                                                        <th style="width: 10%">Parent Committee</th>
+                                                        <th style="width: 15%">Contact</th>
+                                                        <th style="width: 20%">office</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody >
+                                                    <tr dir-paginate="comh in hcom|filter:hc|itemsPerPage:10" pagination-id="s1" >
+                                                        <td>
+                                                            <div  ng-style="comh.previousClass=='fa fa-star'?{'color':'yellow'}:{'color':'black'}" ng-click="setfavsComm(comh.cid)" style="display:inline-block;text-align: center;font-size: 20px" >
+                                                                <i style="border-radius: 5px;border: 1px solid gray;" ng-style="comh.previousClass=='fa fa-star'?{'background-color':'gray'}:{'background-color':'none'}" id="{{comh.cid}}" ng-class="returnCID==comh.cid?starClassComm:comh.previousClass" ></i>
+                                                            </div>
+                                                        </td>
+                                                        <td><img class="chamberImage" src="{{comh.chamsrc}}"><span style="vertical-align:top">{{comh.chamber|capitalize}}</span></td>
+                                                        <td>{{comh.cid}}</td>
+                                                        <td>{{comh.name}}</td>
+                                                        <td>{{comh.pc}}</td>
+                                                        <td>{{comh.contact}}</td>
+                                                        <td>{{comh.office}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="text-center">
+                                                <dir-pagination-controls pagination-id="s1" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!--sen c tab-->
+                                <div id="senCTab"  class="tab-pane fade">
+                                    <div class="panel panel-default insidePanel">
+                                        <div class="panel-heading" >
+                                            <div class="row">
+                                                <div class="form-inline">
+                                                    <label for="senCSearch" class="col-lg-9 col-xs-5 control-label">Senate</label>
+                                                    <div class="form-group col-lg-3 col-xs-7">
+                                                        <input type="text" id="senCSearch" class="form-control col-lg-2" ng-model="sc">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div   class=" table-responsive">
+                                                <table  style="font-size: 10px" class="table" id="scresultsTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 10%;margin-right: 10%"></th>
+                                                        <th style="width: 10%">Chamber</th>
+                                                        <th style="width: 10%">Committee ID</th>
+                                                        <th style="width: 60%">Name</th>
+                                                        <th style="width: 10%">Parent Committee</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr dir-paginate="coms in scom|filter:sc|itemsPerPage:10 track by coms.cid" pagination-id="s2" >
+                                                        <td>
+                                                            <div ng-style="coms.previousClass=='fa fa-star'?{'color':'yellow'}:{'color':'black'}" ng-click="setfavsComm(coms.cid)" style="display:inline-block;border-radius: 5px;text-align: center;border: 1px solid gray;font-size: 20px" >
+                                                                <i id="{{coms.cid}}" ng-class="returnCID==coms.cid?starClassComm:coms.previousClass" ></i>
+                                                            </div>
+                                                        </td>
+                                                        <td><img class="chamberImage" src="{{coms.chamsrc}}"><span style="vertical-align:top">{{coms.chamber|capitalize}}</span></td>
+                                                        <td>{{coms.cid}}</td>
+                                                        <td>{{coms.name}}</td>
+                                                        <td>{{coms.pc}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="text-center">
+                                                <dir-pagination-controls pagination-id="s2" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div id="jointCTab"  class="tab-pane fade">
+                                    <div class="panel panel-default insidePanel">
+                                        <div class="panel-heading" >
+                                            <div class="row">
+                                                <div class="form-inline">
+                                                    <label for="jCSearch" class="col-lg-9 col-xs-5 control-label">Joint</label>
+                                                    <div class="form-group col-lg-3 col-xs-7">
+                                                        <input type="text" id="jCSearch" class="form-control col-lg-2" ng-model="jc">
+                                                    </div>
+                                                </div>
+                                             </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div   class=" table-responsive">
+                                                <table  style="font-size: 10px" class="table" id="jcresultsTable">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 15%;margin-right: 10%"></th>
+                                                        <th style="width: 15%">Chamber</th>
+                                                        <th style="width: 15%">Committee ID</th>
+                                                        <th style="width: 65%">Name</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr dir-paginate="comsj in jcom|filter:jc|itemsPerPage:10" pagination-id="s3"  >
+                                                        <td>
+                                                            <div ng-style="comsj.previousClass=='fa fa-star'?{'color':'yellow'}:{'color':'black'}" ng-click="setfavsComm(comsj.cid)" style="display:inline-block;border-radius: 5px;text-align: center;border: 1px solid gray;font-size: 20px" >
+                                                                <i  id="{{comsj.cid}}" ng-class="returnCID==comsj.cid?starClassComm:comsj.previousClass" ></i>
+                                                            </div>
+                                                        </td>
+                                                        <td><img class="chamberImage" src="{{comsj.chamsrc}}"><span style="vertical-align:top">{{comsj.chamber|capitalize}}</span></td>
+                                                        <td>{{comsj.cid}}</td>
+                                                        <td>{{comsj.name}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <dir-pagination-controls pagination-id="s3" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="FavouritesHome" style="display: none">
+            <div class="row">
+                <h3 class="wrapHeads">Favorites</h3>
+                <hr class="no-margin" style="border-color: gray;border-style: ridge solid">
+                <hr class="no-margin" style="border-color: gray;border-style: ridge solid;padding-bottom:1%; ">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="panel panel-default outerPanel" >
+
+
+
+                        <ul  class="nav nav-tabs" id="allFavTabs">
+                            <li ng-click="ajxCallFav()" class="active" id="fb1" ><a data-toggle="tab"  href="#lFTab">Legislators</a></li>
+                            <li ng-click="ajxCallFavBill()" id="fb2"><a data-toggle="tab" href="#bFTab">Bills</a></li>
+                            <li ng-click="ajxCallFavComm()" id="fb3"><a data-toggle="tab" href="#cFTab">Committees</a></li>
+                        </ul>
+
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!--STATE TAB UNDER LEGISLATOR-->
+                                <!--https://congress.api.sunlightfoundation.com/legislators?apikey=c113fa1d19e84e5e82663f29559830db&per_p
+                            age=all-->
+                                <div id="lFTab"  class="tab-pane fade in active" >
+                                    <div class="panel panel-default insidePanel"  >
+                                        <div class="panel-heading" >
+                                            <strong>Favorite Legislators</strong>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div   class="  table-responsive" id="LegFavTable">
+                                                <table id="favoriteLT" style="font-size: 10px" class="table" >
+                                                    <thead>
+                                                    <tr>
+                                                    <th style="width: 10%"></th>
+                                                    <th style="width: 15%">Image</th>
+                                                    <th style="width: 10%">Party</th>
+                                                    <th style="width: 10%">Name</th>
+                                                    <th style="width: 15%">Chamber</th>
+                                                    <th style="width: 10%">State</th>
+                                                    <th style="width: 10%">Email</th>
+                                                    <th style="width: 15%"></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody >
+                                                    <tr id="pl-{{useri.bioguide_id}}" dir-paginate="useri in useris|itemsPerPage:10" pagination-id="fava" >
+                                                        <td  style="vertical-align: center" class="clicks"><i ng-click="deleteFav(useri.bioguide_id,'leg')" class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
+                                                        <td class="clicks"><img class="faceImage" src={{useri.photo}}></td>
+                                                        <td style="vertical-align: center" class="clicks"><img class="partyImage" src={{useri.party}}></td>
+                                                        <td style="vertical-align: center">{{useri.name}}</td>
+                                                        <td style="vertical-align: center"><img class="chamberImage" src="{{useri.chamsrc}}"><span>{{useri.chamber|capitalize}}</span></td>
+                                                        <td style="vertical-align: center">{{useri.state}}</td>
+                                                        <td style="vertical-align: center">{{useri.email}}</td>
+                                                        <td style="vertical-align: center"><a  ng-click="setSelected(useri.bioguide_id)" role="button"   href="#myCarousel" data-slide-to="1"   class="btn btn-primary right clickClass" >View Details</a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="text-center">
+                                                <dir-pagination-controls pagination-id="fava" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="bFTab"  class="tab-pane fade" >
+                                    <div class="panel panel-default insidePanel">
+                                        <div class="panel-heading" >
+                                            <strong>Favorite Bills</strong>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div   class="  table-responsive" id="billFavTable">
+                                                <table id="favoriteBT" style="font-size: 10px" class="table" >
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 10%;"></th>
+                                                        <th style="width: 8%;">Bill Id</th>
+                                                        <th style="width: 8%">Bill Type</th>
+                                                        <th  style="width: 20%">Title</th>
+                                                        <th style="width: 13%">Chamber</th>
+                                                        <th style="width: 12%">Introduced On</th>
+                                                        <th style="width: 10%">Sponsor</th>
+                                                        <th style="width: 19%">View Details</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody >
+                                                    <tr id="pb-{{bill.bid}}" dir-paginate="bill in userib|itemsPerPage:10" pagination-id="favb">
+                                                        <td  class="clicks"><i  ng-click="deleteFav(bill.bid,'bill')" class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
+                                                        <td>{{bill.bid|uppercase}}</td>
+                                                        <td>{{bill.bType|uppercase}}</td>
+                                                        <td>{{bill.title}}</td>
+                                                        <td><img class="chamberImage" src="{{bill.chamsrc}}"><span>{{bill.chamber|capitalize}}</span></td>
+                                                        <td>{{bill.ion}}</td>
+                                                        <td>{{bill.sponsor}}</td>
+                                                        <td><a ng-click="setBDetails(bill.bid,bill.status)" role="button"   href="#myBillCarousel" data-slide-to="1"  role="button"   class="btn btn-primary right clickBillClass" >View Details</a></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <!--                                                    <dir-pagination-controls boundary-links="true"  template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>-->
+                                        <dir-pagination-controls pagination-id="favb" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                    </div>
+                                </div>
+                                <div id="cFTab"  class="tab-pane fade" >
+                                    <div class="panel panel-default insidePanel"  >
+
+                                        <div class="panel-heading" >
+                                            <strong>Favorite Committees</strong>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div   class="  table-responsive" id="cfresultsTable">
+                                                <table id="favoriteComT" style="font-size: 10px" class="table" >
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 10%;margin-right: 10%"></th>
+                                                        <th style="width: 15%">Chamber</th>
+                                                        <th style="width: 10%">Committee ID</th>
+                                                        <th style="width: 30%">Name</th>
+                                                        <th style="width: 20%">Parent Committee</th>
+                                                        <th style="width: 15%">Sub Committee</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody >
+                                                    <tr id="pcm-{{comh.cid}}" dir-paginate="comh in useric|itemsPerPage:10" pagination-id="favc" >
+                                                        <td><i ng-click="deleteFav(comh.cid,'com')" class="fa fa-trash-o fa-2x" aria-hidden="true"></i></td>
+                                                        <td><img class="chamberImage" src="{{comh.chamsrc}}"><span>{{comh.chamber|capitalize}}</span></td>
+                                                        <td>{{comh.cid}}</td>
+                                                        <td>{{comh.name}}</td>
+                                                        <td>{{comh.pc}}</td>
+                                                        <td>{{comh.sc|capitalize}}</td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <!--                                                    <dir-pagination-controls boundary-links="true"  template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>-->
+                                        <dir-pagination-controls pagination-id="favc" boundary-links="true" template-url="/php/dirPagination.tpl.html"></dir-pagination-controls>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-animate.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="https://use.fontawesome.com/6cebc1bba3.js"></script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/dirPagination.js"></script>
+<script type="text/javascript" src="/js/hw8.js"></script>
+
+
+</body>
+</html>
+

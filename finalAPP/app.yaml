@@ -1,0 +1,21 @@
+application: transparent-gov-add
+version: 1
+runtime: php55
+api_version: 1
+
+handlers:
+- url: /php
+  static_dir: php
+- url: /js
+  static_dir: js
+
+- url: /css
+  static_dir: css
+
+- url: /
+  script: 8whym.html
+
+- url: /(.+\.php)$
+  script: hw8.php
+
+
